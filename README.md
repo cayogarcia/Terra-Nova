@@ -1,73 +1,61 @@
-# React + TypeScript + Vite
+🚀 TerraNova - Front-end
+Este é o repositório do front-end da TerraNova, uma aplicação desenvolvida com React e TypeScript, focada em gestão de riscos. O projeto utiliza Vite para um desenvolvimento ultra-rápido e está totalmente conteinerizado com Docker.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🛠️ Tecnologias Utilizadas
+React 18 (UI Library)
 
-Currently, two official plugins are available:
+TypeScript (Tipagem estática)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Vite (Build tool e Dev server)
 
-## React Compiler
+Nginx (Servidor web para produção)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Docker & Docker Compose (Orquestração de containers)
 
-## Expanding the ESLint configuration
+📂 Estrutura de Pastas
+Conforme a organização do projeto:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+src/assets: Recursos estáticos como imagens e fontes locais.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+src/components: Componentes reutilizáveis da interface.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+src/pages: Páginas principais (Home, Empresa, Contato, etc.).
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+src/routes: Configurações de navegação da SPA.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+src/styles: Arquivos de estilização global (CSS/SASS).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+public: Arquivos estáticos acessíveis diretamente (ícones e logotipos).
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+🚀 Como Executar o Projeto
+🐳 Via Docker (Recomendado para Produção)
+O projeto já inclui um Dockerfile e um nginx.conf otimizados. Para subir o ambiente:
+
+Bash
+docker-compose up -d
+A aplicação estará disponível em http://localhost:8080.
+
+💻 Ambiente de Desenvolvimento
+Se desejar rodar localmente sem Docker:
+
+Instale as dependências:
+
+Bash
+npm install
+Inicie o servidor de desenvolvimento:
+
+Bash
+npm run dev
+🏗️ Build e Deploy
+O processo de build é gerenciado pelo Vite. Em produção, o Docker utiliza uma estratégia de Multi-stage Build:
+
+O código é transpilado e minificado.
+
+Os arquivos estáticos são servidos pelo Nginx na porta 80 do container.
+
+🔒 Acesso Externo
+Este projeto está configurado para ser exposto via Cloudflare Tunnel.
+
+Domínio: terranovagestaoderiscos.com.br
+
+Serviço Local: Redirecionado da porta 8080 (Host) para o túnel.
