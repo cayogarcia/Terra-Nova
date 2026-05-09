@@ -1,0 +1,161 @@
+:root {
+  --primary: #1B5E20;
+  --primary-light: #A5D6A7;
+  --background: #16171d;
+  --text: #E2E8F0;
+  --text-title: #ffffff;
+  --border: #2D3748;
+
+  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* RESET */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BASE */
+
+html,
+body {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--background);
+}
+
+/* APP */
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* CONTEÚDO */
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* SECTIONS */
+
+section {
+  width: 100%;
+  flex: 1;
+  padding: clamp(60px, 7vw, 100px) 20px;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* IMAGENS */
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* TIPOGRAFIA */
+
+h1,
+h2,
+h3 {
+  color: var(--text-title);
+  font-weight: 600;
+}
+
+h1 {
+  font-size: clamp(26px, 5vw, 56px);
+}
+
+h2 {
+  font-size: clamp(18px, 3vw, 28px);
+}
+
+p {
+  color: var(--text);
+  line-height: 1.8;
+  font-size: clamp(15px, 2vw, 18px);
+}
+
+/* MENU */
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--primary-light);
+}
+
+.menu-mobile {
+  display: none;
+}
+
+/* NOTEBOOK */
+
+@media (max-width: 1200px) {
+  section {
+    padding: 80px 30px;
+  }
+}
+
+/* TABLET */
+
+@media (max-width: 992px) {
+  section {
+    padding: 70px 25px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+  .menu-desktop {
+    display: none !important;
+  }
+
+  .menu-mobile {
+    display: block !important;
+  }
+
+  h1,
+  h2,
+  p {
+    text-align: center;
+  }
+
+  section {
+    padding: 60px 20px !important;
+    background-attachment: scroll !important;
+  }
+}
+
+/* CELULARES PEQUENOS */
+
+@media (max-width: 480px) {
+  section {
+    padding: 50px 15px !important;
+  }
+}

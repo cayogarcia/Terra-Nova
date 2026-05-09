@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  terranova:
+    build: .
+    container_name: terranova-site
+    ports:
+      - "8080:80"
+    restart: always
