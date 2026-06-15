@@ -1,25 +1,15 @@
-import background from "../assets/background.jpeg"
-
 function Contato() {
   return (
     <section
       style={{
-        padding: "40px 20px",
-        backgroundImage: `linear-gradient(
-          rgba(10, 15, 25, 0.82),
-          rgba(10, 15, 25, 0.82)
-        ), url(${background})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        minHeight: "calc(100svh - 160px)"
+        background: "#FFFFFF",
       }}
     >
       <div
         style={{
           maxWidth: "1000px",
           margin: "0 auto",
-          color: "#A0AEC0",
+          color: "#000000",
           textAlign: "center"
         }}
       >

@@ -1,18 +1,11 @@
-import background from "../assets/background.jpeg"
+import servicos1 from "../assets/servicos1.png"
+import gestaoderiscos from "../assets/gestaoderiscos.png"
 
 function Servicos() {
   return (
     <section
       style={{
-        padding: "40px 20px",
-        backgroundImage: `linear-gradient(
-          rgba(10, 15, 25, 0.82),
-          rgba(10, 15, 25, 0.82)
-        ), url(${background})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        minHeight: "calc(100svh - 140px)"
+        background: "#FFFFFF",
       }}
     >
       <div
@@ -34,11 +27,23 @@ function Servicos() {
           Nossos Serviços
         </h1>
 
+        <img
+            src={servicos1}
+            alt="Nossos Serviços"
+            style={{
+              width: "100%",
+              maxHeight: "700px",
+              objectFit: "cover",
+              borderRadius: "12px",
+              margin: "25px 0"
+            }}
+          />
+
         <div
           style={{
             fontSize: "18px",
             lineHeight: "1.9",
-            color: "#A0AEC0",
+            color: "#000000",
             textAlign: "justify"
           }}
         >
@@ -52,6 +57,18 @@ function Servicos() {
             socioambiental e conformidade legal, promovendo transição para
             modelos de negócio sustentáveis, éticos e regenerativos.
           </p>
+
+          <ul style={{ paddingLeft: "25px", margin: "15px 0" }}>
+            <li>Preparação para crédito sustentável</li>
+            <li>Questionário Socioambienta</li>
+            <li>Due Diligence Socioambiental</li>
+            <li>Avaliação de Risco Climático</li>
+            <li>KYS (Know Your Supplier)</li>
+            <li>ESG Assessment</li>
+            <li>PRSAC Assessment</li>
+            <li>Gap assessment ESG</li>
+            <li>Sem gestão de risco socioambiental, o custo de capital aumenta.</li>
+          </ul>
 
           <h3 style={{ color: "#1B5E20", margin: "40px 0 20px" }}>
             CONSULTORIA EM SUSTENTABILIDADE
@@ -84,6 +101,18 @@ function Servicos() {
           <h3 style={{ color: "#1B5E20", margin: "40px 0 20px" }}>
             GESTÃO DE RISCOS E CONFORMIDADE
           </h3>
+
+          <img
+            src={gestaoderiscos}
+            alt="Nossos Serviços"
+            style={{
+              width: "100%",
+              maxHeight: "650px",
+              objectFit: "cover",
+              borderRadius: "12px",
+              margin: "25px 0"
+            }}
+          />
 
           <p>
             Implementamos práticas de governança corporativa voltadas à
@@ -196,6 +225,10 @@ function Servicos() {
             A TERRA NOVA coloca-se à disposição para apresentar proposta técnica
             personalizada, cronograma de execução e orçamento conforme as
             necessidades específicas da organização.
+          </p>
+
+          <p>
+            Ajudamos produtores rurais e empresas a reduzir risco de crédito, embargo e perda financeira por exigências socioambientais.
           </p>
         </div>
       </div>

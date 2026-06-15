@@ -1,18 +1,8 @@
-import background from "../assets/background.jpeg"
-
 function ApresentacaoInstitucional() {
   return (
     <section
       style={{
-        padding: "40px 20px",
-        backgroundImage: `linear-gradient(
-          rgba(10, 15, 25, 0.52),
-          rgba(10, 15, 25, 0.52)
-        ), url(${background})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        minHeight: "calc(100svh - 160px)"
+        background: "#FFFFFF",
       }}
     >
       <div
@@ -38,7 +28,7 @@ function ApresentacaoInstitucional() {
           style={{
             fontSize: "18px",
             lineHeight: "1.8",
-            color: "#272829",
+            color: "#000000",
             textAlign: "left"
           }}
         >

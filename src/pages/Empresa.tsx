@@ -1,18 +1,8 @@
-import background from "../assets/background.jpeg"
-
 function Empresa() {
   return (
     <section
       style={{
-        padding: "40px 20px",
-        backgroundImage: `linear-gradient(
-          rgba(10, 15, 25, 0.82),
-          rgba(10, 15, 25, 0.82)
-        ), url(${background})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        minHeight: "calc(100svh - 160px)"
+        background: "#FFFFFF",
       }}
     >
       <div
@@ -40,7 +30,7 @@ function Empresa() {
           style={{
             fontSize: "18px",
             lineHeight: "1.8",
-            color: "#A0AEC0",
+            color: "#000000",
             textAlign: "left"
           }}
         >
