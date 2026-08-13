@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { useState } from "react"
-import logo from "../assets/terranova2.png"
+import logo from "../assets/logo-terranova.png"
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -8,11 +8,12 @@ function Header() {
   return (
     <header
       style={{
-        background: "#1B5E20",
+        background: "#FFFFFF",
         position: "sticky",
         top: 0,
         zIndex: 1000,
-        width: "100%"
+        width: "100%",
+        borderBottom: "1px solid #e0e0e0"
       }}
     >
       <div
@@ -31,7 +32,7 @@ function Header() {
             src={logo}
             alt="Terranova"
             style={{
-              height: "90px",
+              height: "100px",
               objectFit: "contain"
             }}
           />
@@ -42,14 +43,16 @@ function Header() {
           style={{
             display: "flex",
             gap: "35px",
-            alignItems: "center"
+            alignItems: "center",
+            color: "#000000", // Texto preto
           }}
         >
-          <Link className="nav-link" to="/">Home</Link>
-          <Link className="nav-link" to="/empresa">Empresa</Link>
-          <Link className="nav-link" to="/apresentacao">Institucional</Link>
-          <Link className="nav-link" to="/servicos">Serviços</Link>
-          <Link className="nav-link" to="/contato">Contato</Link>
+          {/* Adicionando color: "inherit" para garantir que o link use a cor do nav */}
+          <Link className="nav-link" to="/" style={{color: "inherit", textDecoration: "none"}}>Home</Link>
+          <Link className="nav-link" to="/empresa" style={{color: "inherit", textDecoration: "none"}}>Empresa</Link>
+          <Link className="nav-link" to="/apresentacao" style={{color: "inherit", textDecoration: "none"}}>Institucional</Link>
+          <Link className="nav-link" to="/servicos" style={{color: "inherit", textDecoration: "none"}}>Serviços</Link>
+          <Link className="nav-link" to="/contato" style={{color: "inherit", textDecoration: "none"}}>Contato</Link>
         </nav>
 
         <div
@@ -57,7 +60,7 @@ function Header() {
           onClick={() => setMenuOpen(!menuOpen)}
           style={{
             fontSize: "40px",
-            color: "#fff",
+            color: "#000000", 
             cursor: "pointer"
           }}
         >
@@ -69,19 +72,22 @@ function Header() {
         <div
           className="mobile-links"
           style={{
-            background: "#1B5E20",
+            background: "#FFFFFF",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             gap: "20px",
-            padding: "25px"
+            padding: "25px",
+            color: "#000000",
+            borderTop: "1px solid #e0e0e0"
           }}
         >
-          <Link className="nav-link" to="/" onClick={() => setMenuOpen(false)}>Home</Link>
-          <Link className="nav-link" to="/empresa" onClick={() => setMenuOpen(false)}>Empresa</Link>
-          <Link className="nav-link" to="/apresentacao" onClick={() => setMenuOpen(false)}>Institucional</Link>
-          <Link className="nav-link" to="/servicos" onClick={() => setMenuOpen(false)}>Serviços</Link>
-          <Link className="nav-link" to="/contato" onClick={() => setMenuOpen(false)}>Contato</Link>
+          {/* Adicionando color: "inherit" para os links mobile também */}
+          <Link className="nav-link" to="/" onClick={() => setMenuOpen(false)} style={{color: "inherit", textDecoration: "none"}}>Home</Link>
+          <Link className="nav-link" to="/empresa" onClick={() => setMenuOpen(false)} style={{color: "inherit", textDecoration: "none"}}>Empresa</Link>
+          <Link className="nav-link" to="/apresentacao" onClick={() => setMenuOpen(false)} style={{color: "inherit", textDecoration: "none"}}>Institucional</Link>
+          <Link className="nav-link" to="/servicos" onClick={() => setMenuOpen(false)} style={{color: "inherit", textDecoration: "none"}}>Serviços</Link>
+          <Link className="nav-link" to="/contato" onClick={() => setMenuOpen(false)} style={{color: "inherit", textDecoration: "none"}}>Contato</Link>
         </div>
       )}
     </header>
