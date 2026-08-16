@@ -19,8 +19,8 @@ interface ServicoItem {
   descricao?: string
   subtituloLista?: string
   subdescricao?: string
-  itens?: string[] // Para cards simples com apenas uma lista
-  secoes?: SecaoSubitens[] // Para cards com subitens categorizados (ex: ESG)
+  itens?: string[]
+  secoes?: SecaoSubitens[]
 }
 
 const servicosData: ServicoItem[] = [
@@ -89,7 +89,7 @@ const servicosData: ServicoItem[] = [
   {
     id: 3,
     imagem: ImgServicos3,
-    titulo: " ESG PARA CLÍNICAS E CONSULTÓRIOS",
+    titulo: "ESG PARA CLÍNICAS E CONSULTÓRIOS",
     descricao:
       "Solução desenvolvida para organizações de menor porte que desejam implementar ESG de maneira prática e proporcional à sua realidade.",
     subtituloLista: "Inclui:",
@@ -117,7 +117,7 @@ const servicosData: ServicoItem[] = [
       "Diagnóstico ambiental",
       "Identificação de impactos",
       "Gestão de resíduos",
-      "Gestão de recursos naturais;",
+      "Gestão de recursos naturais",
       "Eficiência energética",
       "Uso racional da água",
       "Redução de desperdícios",
@@ -200,6 +200,7 @@ function Servicos() {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
+    height: "100%", // Garante que o card ocupe toda a altura da célula da grid
     overflow: "hidden"
   }
 
@@ -237,13 +238,12 @@ function Servicos() {
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
             gap: "25px",
-            color: "#2C2C2C",
-            alignItems: "start"
+            color: "#2C2C2C"
           }}
         >
           {servicosData.map((servico) => {
             const isExpanded = expandedCards.includes(servico.id)
-            const limiteLinhas = 4 // Limite de linhas visíveis por card antes de expandir
+            const limiteLinhas = 4
 
             const lineClampStyle: React.CSSProperties = !isExpanded
               ? {
@@ -271,63 +271,72 @@ function Servicos() {
                     />
                   )}
 
-                  {/* Conteúdo do Card */}
-                  <div style={{ padding: "20px" }}>
-                    <h3 style={titleStyle}>{servico.titulo}</h3>
+                  {/* Conteúdo do Card em Flexbox */}
+                  <div
+                    style={{
+                      padding: "20px",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      flex: 1
+                    }}
+                  >
+                    <div>
+                      <h3 style={titleStyle}>{servico.titulo}</h3>
 
-                    {/* Bloco de texto com limitação de linhas */}
-                    <div style={lineClampStyle}>
-                      {servico.descricao && (
-                        <p style={{ margin: "0 0 10px 0" }}>{servico.descricao}</p>
-                      )}
+                      {/* Bloco de texto com limitação de linhas */}
+                      <div style={lineClampStyle}>
+                        {servico.descricao && (
+                          <p style={{ margin: "0 0 10px 0" }}>{servico.descricao}</p>
+                        )}
 
-                      {servico.subtituloLista && (
-                        <p style={{ marginTop: "15px", fontWeight: "600" }}>
-                          {servico.subtituloLista}
-                        </p>
-                      )}
+                        {servico.subtituloLista && (
+                          <p style={{ marginTop: "15px", fontWeight: "600" }}>
+                            {servico.subtituloLista}
+                          </p>
+                        )}
 
-                      {/* Renderização de itens simples */}
-                      {servico.itens && (
-                        <ul
-                          style={{
-                            ...listStyle,
-                            ...(servico.id === 6
-                              ? { listStyleType: "none", paddingLeft: 0 }
-                              : {})
-                          }}
-                        >
-                          {servico.itens.map((item, index) => (
-                            <li key={index}>{item}</li>
+                        {/* Renderização de itens simples */}
+                        {servico.itens && (
+                          <ul
+                            style={{
+                              ...listStyle,
+                              ...(servico.id === 6
+                                ? { listStyleType: "none", paddingLeft: 0 }
+                                : {})
+                            }}
+                          >
+                            {servico.itens.map((item, index) => (
+                              <li key={index}>{item}</li>
+                            ))}
+                          </ul>
+                        )}
+
+                        {/* Renderização de seções com subitens */}
+                        {servico.secoes &&
+                          servico.secoes.map((secao, idx) => (
+                            <div key={idx} style={{ marginTop: "10px" }}>
+                              <strong style={{ color: "#1B5E20" }}>
+                                {secao.subtitulo}
+                              </strong>
+                              <ul style={listStyle}>
+                                {secao.itens.map((item, subIdx) => (
+                                  <li key={subIdx}>{item}</li>
+                                ))}
+                              </ul>
+                            </div>
                           ))}
-                        </ul>
-                      )}
 
-                      {/* Renderização de seções com subitens */}
-                      {servico.secoes &&
-                        servico.secoes.map((secao, idx) => (
-                          <div key={idx} style={{ marginTop: "10px" }}>
-                            <strong style={{ color: "#1B5E20" }}>
-                              {secao.subtitulo}
-                            </strong>
-                            <ul style={listStyle}>
-                              {secao.itens.map((item, subIdx) => (
-                                <li key={subIdx}>{item}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
+                        {/* Subdescrição final */}
+                        {servico.subdescricao && (
+                          <p style={{ marginTop: "12px", fontSize: "14px", fontStyle: "italic", color: "#444" }}>
+                            {servico.subdescricao}
+                          </p>
+                        )}
+                      </div>
+                    </div>
 
-                      {/* Subdescrição final ex: Card 5 */}
-                      {servico.subdescricao && (
-                        <p style={{ marginTop: "12px", fontSize: "14px", fontStyle: "italic", color: "#444" }}>
-                          {servico.subdescricao}
-                        </p>
-                      )}
-                    </div>  
-                  </div>
-
-                    {/* Botão Ver mais / Ver menos */}
+                    {/* Botão alinhado ao rodapé */}
                     <button
                       onClick={() => toggleExpand(servico.id)}
                       style={{
@@ -336,16 +345,18 @@ function Servicos() {
                         color: "#1B5E20",
                         fontWeight: "bold",
                         cursor: "pointer",
-                        padding: "8px 0 0 0",
+                        padding: "16px 0 0 0",
                         textAlign: "left",
                         fontSize: "15px",
-                        textDecoration: "underline"
+                        textDecoration: "underline",
+                        marginTop: "auto"
                       }}
                     >
                       {isExpanded ? "Ver menos" : "Ver mais..."}
                     </button>
                   </div>
                 </div>
+              </div>
             )
           })}
         </div>
