@@ -84,7 +84,7 @@ function Header() {
         >
           {/* Adicionando color: "inherit" para os links mobile também */}
           <Link className="nav-link" to="/" onClick={() => setMenuOpen(false)} style={{color: "inherit", textDecoration: "none"}}>Home</Link>
-          <Link className="nav-link" to="/empresa" onClick={() => setMenuOpen(false)} style={{color: "inherit", textDecoration: "none"}}>Empresa</Link>
+          <Link className="nav-link" to="/missao" onClick={() => setMenuOpen(false)} style={{color: "inherit", textDecoration: "none"}}>Missão</Link>
           <Link className="nav-link" to="/apresentacao" onClick={() => setMenuOpen(false)} style={{color: "inherit", textDecoration: "none"}}>Institucional</Link>
           <Link className="nav-link" to="/servicos" onClick={() => setMenuOpen(false)} style={{color: "inherit", textDecoration: "none"}}>Serviços</Link>
           <Link className="nav-link" to="/contato" onClick={() => setMenuOpen(false)} style={{color: "inherit", textDecoration: "none"}}>Contato</Link>
