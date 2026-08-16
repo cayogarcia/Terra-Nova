@@ -49,7 +49,7 @@ function Header() {
         >
           {/* Adicionando color: "inherit" para garantir que o link use a cor do nav */}
           <Link className="nav-link" to="/" style={{color: "inherit", textDecoration: "none"}}>Home</Link>
-          <Link className="nav-link" to="/empresa" style={{color: "inherit", textDecoration: "none"}}>Empresa</Link>
+          <Link className="nav-link" to="/missao" style={{color: "inherit", textDecoration: "none"}}>Missão</Link>
           <Link className="nav-link" to="/apresentacao" style={{color: "inherit", textDecoration: "none"}}>Institucional</Link>
           <Link className="nav-link" to="/servicos" style={{color: "inherit", textDecoration: "none"}}>Serviços</Link>
           <Link className="nav-link" to="/contato" style={{color: "inherit", textDecoration: "none"}}>Contato</Link>

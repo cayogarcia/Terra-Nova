@@ -8,7 +8,7 @@ function ApresentacaoInstitucional() {
       <div
         style={{
           maxWidth: "1000px",
-          margin: "0 auto"
+          margin: "0 auto",
         }}
       >
         <h1
@@ -16,9 +16,7 @@ function ApresentacaoInstitucional() {
             color: "#1B5E20",
             textAlign: "center",
             marginBottom: "40px",
-            textShadow: `
-              0.5px 0.5px 0 #fff
-            `
+            textShadow: `0.5px 0.5px 0 #fff`,
           }}
         >
           Apresentação Institucional
@@ -29,46 +27,36 @@ function ApresentacaoInstitucional() {
             fontSize: "18px",
             lineHeight: "1.8",
             color: "#000000",
-            textAlign: "left"
+            textAlign: "left",
           }}
         >
-          <p>
-            A <strong>Terra Nova Gestão de Riscos Socioambientais e Desenvolvimento
-            Sustentável</strong> é uma empresa especializada em análise, prevenção e
-            gestão de riscos socioambientais, atuando no apoio técnico e
-            estratégico a organizações que buscam alinhar seus projetos aos
-            princípios da sustentabilidade.
+          <p style={{ marginTop: "15px" }}>
+            A <strong>TERRA NOVA – Gestão de Riscos Socioambientais e Desenvolvimento Sustentável</strong> é
+            uma empresa de consultoria especializada em gestão de riscos, ESG, sustentabilidade, ética,
+            governança e desenvolvimento sustentável, com atuação estratégica voltada ao setor da saúde.
           </p>
 
-          <p style={{ marginTop: "25px" }}>
-            Nosso trabalho integra conhecimento multidisciplinar nas áreas
-            ambiental, social e de governança, oferecendo soluções que auxiliam
-            empresas, instituições e empreendimentos a identificar riscos,
-            atender exigências regulatórias e implementar práticas responsáveis
-            de gestão.
+          <p style={{ marginTop: "15px" }}>
+            Nossa missão é contribuir para que organizações de saúde alcancem excelência operacional,
+            responsabilidade socioambiental, integridade, segurança, eficiência e geração de valor,
+            transformando desafios ambientais, sociais e de governança em oportunidades concretas de
+            desenvolvimento.
           </p>
 
-          <p style={{ marginTop: "25px" }}>
-            Atuamos com foco na antecipação de riscos, na mitigação de impactos
-            e na promoção de estratégias sustentáveis, contribuindo para que
-            projetos e atividades econômicas sejam desenvolvidos de forma segura,
-            eficiente e socialmente responsável.
+          <p style={{ marginTop: "15px" }}>
+            A Terra Nova entende que sustentabilidade na saúde vai muito além da questão ambiental. Envolve a
+            forma como uma organização cuida das pessoas, administra seus recursos, protege seus
+            profissionais e pacientes, conduz seus negócios, toma decisões e se relaciona com a sociedade.
           </p>
 
-          <p style={{ marginTop: "25px" }}>
-            A Terra Nova acredita que o desenvolvimento sustentável depende de
-            planejamento, conhecimento técnico e compromisso com o futuro.
-          </p>
-
-          <p style={{ marginTop: "25px" }}>
-            Por isso, trabalhamos para construir soluções que fortaleçam a
-            sustentabilidade dos negócios e a proteção do meio ambiente e das
-            comunidades.
+          <p style={{ marginTop: "15px" }}>
+            Por isso, nossa atuação contempla hospitais, clínicas, laboratórios, consultórios, centros médicos,
+            instituições de diagnóstico, empresas e demais organizações integrantes da cadeia da saúde.
           </p>
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default ApresentacaoInstitucional
+export default ApresentacaoInstitucional;
