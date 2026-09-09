@@ -18,6 +18,12 @@ i18n
       },
     },
     fallbackLng: "pt",
+    supportedLngs: ["pt", "en"],
+    nonExplicitSupportedLngs: true, // Trata 'pt-BR' como 'pt' e 'en-US' / 'en-GB' como 'en'
+    detection: {
+      order: ["localStorage", "navigator", "htmlTag"],
+      caches: ["localStorage"], // Grava a escolha manual no armazenamento do celular
+    },
     interpolation: {
       escapeValue: false,
     },
