@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import imgTerraNovaImpacto from '../assets/imgTerraNovaImpacto.jpg';
+import imgODS from '../assets/ODS.jpeg';
 
 const API_URL = "http://127.0.0.1:8000";
 
@@ -8,7 +10,19 @@ interface ProjetoPublico {
   nome_projeto: string;
 }
 
+// Função para aplicar a máscara de CNPJ (00.000.000/0000-00)
+const maskCNPJ = (value: string): string => {
+  return value
+    .replace(/\D/g, '') // Remove caracteres não numéricos
+    .slice(0, 14) // Limita a 14 dígitos puros
+    .replace(/^(\d{2})(\d)/, '$1.$2')
+    .replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3')
+    .replace(/\.(\d{3})(\d)/, '.$1/$2')
+    .replace(/(\d{4})(\d)/, '$1-$2');
+};
+
 export const Cadastro: React.FC = () => {
+  const navigate = useNavigate();
   const [modoView, setModoView] = useState<'cadastro' | 'login'>('login');
   const [tipoPerfil, setTipoPerfil] = useState<'empresa' | 'projeto'>('empresa');
   const [feedback, setFeedback] = useState<{ mensagem: string; tipo: 'success' | 'error' } | null>(null);
@@ -26,6 +40,11 @@ export const Cadastro: React.FC = () => {
 
   // Lista de Projetos Públicos
   const [projetos, setProjetos] = useState<ProjetoPublico[]>([]);
+
+  const handleCnpjChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formattedCnpj = maskCNPJ(e.target.value);
+    setCnpj(formattedCnpj);
+  };
 
   const carregarProjetos = async () => {
     try {
@@ -81,8 +100,6 @@ export const Cadastro: React.FC = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          email,
-          senha,
           nome_projeto: nomeProjeto,
         }),
       });
@@ -90,7 +107,6 @@ export const Cadastro: React.FC = () => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.detail || 'Erro ao realizar o cadastro.');
 
-      setLoginEmail(email);
       setFeedback({ mensagem: 'Projeto cadastrado com sucesso! Faça seu login para ver mais detalhes.', tipo: 'success' });
       
       setEmail(''); setSenha(''); setNomeProjeto('');
@@ -119,13 +135,31 @@ export const Cadastro: React.FC = () => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.detail || 'E-mail ou senha inválidos.');
 
+      // Salva os dados no localStorage
+      localStorage.setItem('user', JSON.stringify({
+        email: data.email || loginEmail,
+        id: data.usuario_id,
+        tipo_perfil: data.tipo_perfil
+      }));
+
+      // Notifica os componentes (ex: Header) sobre a mudança de login
+      window.dispatchEvent(new Event('authChange'));
+
       setFeedback({ mensagem: 'Login realizado com sucesso!', tipo: 'success' });
+      setLoginSenha('');
+
+      // Redireciona para o Dashboard do projeto selecionado ou do próprio usuário
+      const projetoIdTarget = localStorage.getItem('projeto_selecionado_id') || data.usuario_id;
+      if (projetoIdTarget) {
+        navigate(`/dashboard/${projetoIdTarget}`);
+      }
     } catch (err: any) {
       setFeedback({ mensagem: err.message, tipo: 'error' });
     }
   };
 
-  const handleVerMais = () => {
+  const handleVerMais = (projetoId: string) => {
+    localStorage.setItem('projeto_selecionado_id', projetoId);
     setModoView('login');
     setFeedback({ mensagem: 'Faça login na sua conta para ver todas as informações do projeto.', tipo: 'error' });
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -134,7 +168,11 @@ export const Cadastro: React.FC = () => {
   return (
     <div style={pageWrapperStyle}>
       <div style={pageContainerStyle}>
-        <div style={watermarkBackgroundStyle} />
+        {/* Container centralizado para as imagens de fundo */}
+        <div style={watermarkContainerStyle}>
+          <img src={imgTerraNovaImpacto} alt="Terra Nova Impacto" style={watermarkImageStyle} />
+          <img src={imgODS} alt="ODS" style={watermarkImageStyle} />
+        </div>
 
         <div style={aboutCardStyle}>
           <h2 style={{ color: '#1b4332', fontSize: '26px', marginBottom: '15px' }}>
@@ -233,14 +271,27 @@ export const Cadastro: React.FC = () => {
                   <input type="email" placeholder="E-mail" value={email} onChange={e => setEmail(e.target.value)} required style={inputStyle} />
                   <input type="password" placeholder="Senha" value={senha} onChange={e => setSenha(e.target.value)} required style={inputStyle} />
                   <input type="text" placeholder="Razão Social" value={razaoSocial} onChange={e => setRazaoSocial(e.target.value)} required style={inputStyle} />
-                  <input type="text" placeholder="CNPJ" value={cnpj} onChange={e => setCnpj(e.target.value)} required style={inputStyle} />
+                  <input 
+                    type="text" 
+                    placeholder="CNPJ (00.000.000/0000-00)" 
+                    value={cnpj} 
+                    onChange={handleCnpjChange} 
+                    maxLength={18}
+                    required 
+                    style={inputStyle} 
+                  />
                   <button type="submit" style={buttonStyle}>Cadastrar Empresa</button>
                 </form>
               ) : (
                 <form onSubmit={handleSubmitProjeto}>
-                  <input type="email" placeholder="E-mail" value={email} onChange={e => setEmail(e.target.value)} required style={inputStyle} />
-                  <input type="password" placeholder="Senha" value={senha} onChange={e => setSenha(e.target.value)} required style={inputStyle} />
-                  <input type="text" placeholder="Nome do Projeto" value={nomeProjeto} onChange={e => setNomeProjeto(e.target.value)} required style={inputStyle} />
+                  <input 
+                    type="text" 
+                    placeholder="Nome do Projeto" 
+                    value={nomeProjeto} 
+                    onChange={e => setNomeProjeto(e.target.value)} 
+                    required 
+                    style={inputStyle} 
+                  />
                   <button type="submit" style={buttonStyle}>Cadastrar Projeto</button>
                 </form>
               )}
@@ -279,7 +330,7 @@ export const Cadastro: React.FC = () => {
                   {proj.nome_projeto}
                 </h3>
                 <button 
-                  onClick={handleVerMais} 
+                  onClick={() => handleVerMais(proj.id)} 
                   style={verMaisButtonStyle}
                 >
                   Ver mais sobre o projeto
@@ -313,19 +364,24 @@ const pageContainerStyle: React.CSSProperties = {
   boxSizing: 'border-box',
 };
 
-const watermarkBackgroundStyle: React.CSSProperties = {
+const watermarkContainerStyle: React.CSSProperties = {
   position: 'absolute',
-  top: 0,
+  top: '20px',
   left: 0,
   right: 0,
-  bottom: 0,
-  backgroundImage: `url(${imgTerraNovaImpacto})`,
-  backgroundSize: '450px',
-  backgroundPosition: 'center 20px',
-  backgroundRepeat: 'no-repeat',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: '20px',
   opacity: 0.95,
   pointerEvents: 'none',
   zIndex: 0,
+};
+
+const watermarkImageStyle: React.CSSProperties = {
+  width: '450px',
+  height: 'auto',
+  objectFit: 'contain',
 };
 
 const aboutCardStyle: React.CSSProperties = {
