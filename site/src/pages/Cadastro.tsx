@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import imgTerraNovaImpacto from '../assets/imgTerraNovaImpacto.jpg';
-import imgODS from '../assets/ODS.jpeg';
 
 const API_URL = "http://127.0.0.1:8000";
 
@@ -171,7 +170,6 @@ export const Cadastro: React.FC = () => {
         {/* Container centralizado para as imagens de fundo */}
         <div style={watermarkContainerStyle}>
           <img src={imgTerraNovaImpacto} alt="Terra Nova Impacto" style={watermarkImageStyle} />
-          <img src={imgODS} alt="ODS" style={watermarkImageStyle} />
         </div>
 
         <div style={aboutCardStyle}>
